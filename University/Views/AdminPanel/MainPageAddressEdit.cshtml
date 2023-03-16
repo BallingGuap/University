@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "MainPageAddressEdit";
+}
+<div>
+  
+
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+
+            <h2>Edit Address</h2>
+            @Html.TextBox("Address", "Type new address")
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Change" class="btn btn-default" />
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+

@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Students";
+}
+
+@model PagedList.IPagedList<University.Models.Student>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Students";
+}
+
+<h2>Students</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+
+
+
+        <th>Sername</th>
+
+
+
+        <th>Email</th>
+
+        <th>Link</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.FirstName)
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.LastName)
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Email)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Grades", "StudentGrades", new { studentId = item.StudentId }, 
+                new { @class = "modalLink btn btn-primary btn-sm active" }) 
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Students", new { page }))
+

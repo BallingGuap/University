@@ -1,0 +1,76 @@
+﻿@using University.Models
+@{
+    ViewBag.Title = "PersonalArea";
+}
+
+
+
+
+
+<h2>My Personal Area</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Name:
+        </dt>
+
+        <dd>
+            @LoginSingelton.Login.FirstName
+        </dd>
+
+        <dt>
+            Lastname:
+        </dt>
+
+        <dd>
+            @LoginSingelton.Login.LastName
+        </dd>
+
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @LoginSingelton.Login.Email
+        </dd>
+
+        <dt>
+            Gender:
+        </dt>
+
+        <dd>
+            @LoginSingelton.Login.Gender
+        </dd>
+
+        <dt>
+            Register Date:
+        </dt>
+
+        <dd>
+            @LoginSingelton.Login.CreatedDate
+        </dd>
+
+        <dt>
+            Post:
+        </dt>
+
+        <dd>
+            @if (LoginSingelton.Type == LoginType.admin_login)
+            {
+                <p>Admin</p>
+            }
+            else if (LoginSingelton.Type == LoginType.lecturer_login)
+            {
+                <p>Lecturer</p>
+            }
+            else if (LoginSingelton.Type == LoginType.student_login)
+            {
+                <p>Student</p>
+            }
+        </dd>
+
+
+    </dl>
+</div>

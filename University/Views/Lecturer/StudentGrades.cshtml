@@ -1,0 +1,67 @@
+﻿@model PagedList.IPagedList<University.Models.Grade>
+@using PagedList.Mvc;
+@using University.Models;
+
+@{
+    ViewBag.Title = $"{ViewBag.Student.Account.FirstName}";
+}
+
+<h2>@ViewBag.Student.Account.FirstName  Grades</h2>
+
+<div>
+    <div>
+        <p>
+            @Html.ActionLink($"Rate this student",
+            "AddGrade", "Lecturer",
+            new { studentId = ViewBag.Student.StudentId },
+            new { @class = "modalLink btn btn-primary btn-sm active" })
+        </p>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Lecturer</th>
+
+
+
+        <th>Grade</th>
+
+
+
+        <th>Subject</th>
+
+        <th>Date</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@Utils.lecturerFirst(ViewBag.Lecturers, item.LecturerId).Account.FirstName</p>
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeNumber)
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeTime)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("StudentGrades", new { ViewBag.Student.StudentId, page }))

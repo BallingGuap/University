@@ -1,0 +1,88 @@
+﻿
+@model PagedList.IPagedList<University.Models.Grade>
+@using PagedList.Mvc;
+@using University.Models;
+@{
+    ViewBag.Title = "Grades";
+}
+
+<h2>Grades</h2>
+
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+
+<div>
+    <p>
+        @Html.ActionLink("Show my GPA", "GPA", "Student",
+        new { }, new { @class = "modalLink btn btn-primary btn-sm active" })
+    </p>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>Lecturer</th>
+
+
+
+        <th>Grade</th>
+
+
+
+        <th>Subject</th>
+
+        <th>Date</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@Utils.lecturerFirst(ViewBag.Lecturers, item.LecturerId).Account.FirstName</p>
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeNumber)
+            </td>
+
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GradeTime)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Grades", new { page }))
+
+
+@section scripts
+      {
+    <script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({ cache: false });
+            $(".modalLink").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal({ backdrop : false});
+                });
+            });
+        })</script>
+}
+
+

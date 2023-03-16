@@ -1,0 +1,222 @@
+﻿@*@model PagedList.IPagedList<University.Models.Subject>
+    @using PagedList.Mvc;
+    @using University.Models;
+    @{
+        ViewBag.Title = "StudentSubjects";
+    }
+
+    <h2>Student's Subjects</h2>
+
+    <table class="table">
+        <tr>
+            <th>Subject Name</th>
+            <th>Day of the week:</th>
+            <th>Time: </th>
+
+
+
+
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+
+
+                <td>
+                    <p> @Html.DisplayFor(modelItem => item.DayOfTheWeek)</p>
+                </td>
+
+                <td>
+                    <p>From @item.From.ToString() to @item.To.ToString()</p>
+                </td>
+
+
+
+            </tr>
+        }
+
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Subjects", new { page }))*@
+
+
+
+
+
+
+
+
+
+@model IEnumerable<University.Models.Subject>
+
+@{
+    ViewBag.Title = "StudentSubjects";
+}
+
+
+
+
+<h2 align="center">My Subjects</h2>
+
+
+
+
+<table class="table table-striped table-dark">
+
+
+
+
+
+    <tr>
+        <td align="center">Monday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Monday")
+            {
+                <td scope="row" align="center">
+                    <div>
+                        @Html.DisplayFor(modelItem => item.SubjectName)
+                        <p>@item.From - @item.To </p>
+                    </div>
+                </td>
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+    </tr>
+
+
+    <tr>
+        <td align="center">Tuesday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Tuesday")
+            {
+                <td scope="row" align="center">
+                        @Html.DisplayFor(modelItem => item.SubjectName)
+                        <p>@item.From - @item.To </p>
+                </td>
+              
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+    </tr>
+
+    <tr>
+        <td align="center">Wensday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Wensday")
+            {
+                <td scope="row" align="center">
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                    <p>@item.From - @item.To </p>
+                </td>
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+    </tr>
+    <tr>
+        <td align="center">Thursday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Thursday")
+            {
+                <td scope="row" align="center">
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                    <p>@item.From - @item.To </p>
+                </td>
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+
+    </tr>
+    <tr>
+        <td align="center">Friday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Friday")
+            {
+                <td scope="row" align="center">
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                    <p>@item.From - @item.To </p>
+                </td>
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+    </tr>
+    <tr>
+        <td align="center">Saturday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Saturday")
+            {
+                <td scope="row" align="center">
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                    <p>@item.From - @item.To </p>
+                </td>
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+    </tr>
+    <tr>
+        <td align="center">Sunday</td>
+        @foreach (var item in Model)
+        {
+            if (item.DayOfTheWeek == "Sunday")
+            {
+                <td scope="row" align="center">
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                    <p>@item.From - @item.To </p>
+                </td>
+            }
+            @*else
+            {
+                <td>
+                    —
+                </td>
+            }*@
+        }
+    </tr>
+
+</table>
+<br />
+
+

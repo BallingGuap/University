@@ -1,0 +1,11 @@
+﻿@model string
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Diary</h1>
+    <div>
+        @{Html.RenderPartial("../MainPageBody/MainPageBodyPartial", Model);}
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@using University.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div id="modDialog" class="modal fade">
+            <div id="dialogContent" class="modal-dialog"></div>
+        </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="Дополнительные параметры">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Diary", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (LoginSingelton.Type == University.Models.LoginType.unregistered_login)
+                    {
+                        <li>@Html.ActionLink("Log In", "Login", "Login")</li>
+                    }
+                    else if (LoginSingelton.Type == University.Models.LoginType.admin_login)
+                    {
+                        <li>@Html.ActionLink($"Lecturer Table", "Index", "LecturerAdmin")</li>
+                        <li>@Html.ActionLink($"Student Table", "Index", "StudentAdmin")</li>
+                        <li>@Html.ActionLink($"Page Address", "MainPageAddressEdit", "AdminPanel")</li>
+                        <li>@Html.ActionLink($"Requests", "StudentsRequests", "LecturerAdmin")</li>
+                        <li>@Html.ActionLink($"{LoginSingelton.Login.Email}", "PersonalArea", "Extension")</li>
+                        <li>@Html.ActionLink($"Log Out", "Logout", "Login")</li>
+                    }
+                    else if (LoginSingelton.Type == University.Models.LoginType.lecturer_login)
+                    {
+                        <li>@Html.ActionLink($"My Students", "Students", "Lecturer")</li>
+                        <li>@Html.ActionLink($"My Subjects", "Subjects", "Lecturer")</li>
+                        <li>@Html.ActionLink($"{LoginSingelton.Login.FirstName}", "PersonalArea", "Extension")</li>
+                        <li>@Html.ActionLink($"Log Out", "Logout", "Login")</li>
+                    }
+                    else if (LoginSingelton.Type == University.Models.LoginType.student_login)
+                    {
+                        <li>@Html.ActionLink($"My Grades", "Grades", "Student")</li>
+                        <li>@Html.ActionLink($"My Subjects", "Subjects", "Student")</li>
+                        <li>@Html.ActionLink($"Sign up for Lessons", "LecturersSubjects", "Student")</li>
+                        <li>@Html.ActionLink($"{LoginSingelton.Login.FirstName}", "PersonalArea", "Extension")</li>
+                        <li>@Html.ActionLink($"Log Out", "Logout", "Login")</li>
+                    }
+
+
+
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Diary</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

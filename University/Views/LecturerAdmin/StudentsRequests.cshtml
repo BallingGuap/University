@@ -1,0 +1,69 @@
+﻿
+
+
+@model PagedList.IPagedList<Utils.StudentsAndSubjects>
+@using PagedList.Mvc;
+@using University.Models;
+
+@{
+    ViewBag.Title = "StudentsRequests";
+}
+
+
+<h2>Students Requests</h2>
+
+<table class="table">
+    <tr>
+        <th>Student Name: </th>
+        <th>Student Sername: </th>
+        <th>Subject Name </th>
+        <th>Links: </th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+       
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.student.Account.FirstName)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.student.Account.LastName)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.subject.SubjectName)
+            </td>
+
+            <td>
+                
+                @Html.ActionLink("Decline", "Decline", new { requestId = item.id },
+                new { @class = "btn btn-danger" })  
+                <strong>|</strong>
+                @Html.ActionLink("Confrim", "Confrim", new
+                {
+                    requestId = item.id,
+                    studentId = item.student.StudentId,
+                    subjectId = item.subject.SubjectId
+                },
+                new { @class = "btn btn-success" })
+            </td>
+
+
+
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("LecturersSubjects", new { page }))
+

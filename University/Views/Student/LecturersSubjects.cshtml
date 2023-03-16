@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<University.Models.Subject>
+@using PagedList.Mvc;
+@using University.Models;
+@{
+    ViewBag.Title = "LecturersSubjects";
+}
+
+
+<h2>Lecturers Subjects</h2>
+
+<table class="table">
+    <tr>
+        <th>Subject Name</th>
+        <th>Day of the week:</th>
+        <th>Time: </th>
+        <th>Link: </th>
+
+
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+
+
+            <td>
+                <p> @Html.DisplayFor(modelItem => item.DayOfTheWeek)</p>
+            </td>
+
+            <td>
+                <p>From @item.From.ToString() to @item.To.ToString()</p>
+            </td>
+            <td>
+                @Html.ActionLink("Sign up for Lesson", "SignSubject", new { subjectId = item.SubjectId }, new {@class = "btn btn-primary" })
+            </td>
+
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) from @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("LecturersSubjects", new { page }))
